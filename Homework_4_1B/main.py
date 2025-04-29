@@ -21,18 +21,6 @@ tf.random.set_seed(1234)
 # )
 
 
-# print("TensorFlow version:", tf.__version__)
-print("Built with CUDA:", tf.test.is_built_with_cuda())
-print("GPU devices:", tf.config.list_physical_devices('GPU'))
-
-# print(torch.cuda.is_available())  # True nếu GPU hoạt động
-# print(torch.cuda.device_count())  # Số lượng GPU
-# print(torch.cuda.get_device_name(0))  # Tên GPU
-# print(torch.version.cuda)     # CUDA version mà PyTorch build
-# print(torch.backends.cudnn.version())  # cuDNN version
-
-
-
 path_to_dataset = os.path.join(
     os.path.dirname("C:\Assignment\homework_ai\data_ai"), "cornell movie-dialogs corpus"
 )
@@ -80,7 +68,6 @@ BUFFER_SIZE = 20000
 dataset = tf.data.Dataset.from_tensor_slices(
     (
         {"inputs": questions[:], "dec_inputs": answers[:, :-1]},
-        # answers[:, 1:],
         {"outputs": answers[:, 1:]},
     )
 )
@@ -137,7 +124,6 @@ class CustomSchedule(tf.keras.optimizers.schedules.LearningRateSchedule):
         self.warmup_steps = warmup_steps
 
     def __call__(self, step):
-        # step = tf.cast(step, tf.float32)  ############################
         arg1 = tf.math.rsqrt(step)
         arg2 = step * (self.warmup_steps ** -1.5)
 
