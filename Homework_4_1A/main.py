@@ -25,12 +25,6 @@ print("TensorFlow version:", tf.__version__)
 print("Built with CUDA:", tf.test.is_built_with_cuda())
 print("GPU devices:", tf.config.list_physical_devices('GPU'))
 
-# print(torch.cuda.is_available())  # True nếu GPU hoạt động
-# print(torch.cuda.device_count())  # Số lượng GPU
-# print(torch.cuda.get_device_name(0))  # Tên GPU
-# print(torch.version.cuda)     # CUDA version mà PyTorch build
-# print(torch.backends.cudnn.version())  # cuDNN version
-
 
 
 path_to_dataset = os.path.join(
