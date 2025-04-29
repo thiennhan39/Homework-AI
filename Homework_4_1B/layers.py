@@ -47,7 +47,8 @@ class MultiHeadAttention(tf.keras.layers.Layer):
             inputs["query"],
             inputs["key"],
             inputs["value"],
-            inputs["mask"],
+            # inputs["mask"],
+            inputs.get("mask", None),
         )
         batch_size = tf.shape(query)[0]
 
@@ -165,7 +166,7 @@ def decoder_layer(units, d_model, num_heads, dropout, name="decoder_layer"):
             "query": inputs,
             "key": inputs,
             "value": inputs,
-            "mask": look_ahead_mask,
+            # "mask": inputs,
         }
     )
     attention1 = tf.keras.layers.LayerNormalization(epsilon=1e-6)(attention1 + inputs)

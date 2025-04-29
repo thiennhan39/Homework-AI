@@ -21,7 +21,7 @@ tf.random.set_seed(1234)
 # )
 
 
-print("TensorFlow version:", tf.__version__)
+# print("TensorFlow version:", tf.__version__)
 print("Built with CUDA:", tf.test.is_built_with_cuda())
 print("GPU devices:", tf.config.list_physical_devices('GPU'))
 
@@ -80,7 +80,8 @@ BUFFER_SIZE = 20000
 dataset = tf.data.Dataset.from_tensor_slices(
     (
         {"inputs": questions[:], "dec_inputs": answers[:, :-1]},
-        answers[:, 1:],
+        # answers[:, 1:],
+        {"outputs": answers[:, 1:]},
     )
 )
 
@@ -136,7 +137,7 @@ class CustomSchedule(tf.keras.optimizers.schedules.LearningRateSchedule):
         self.warmup_steps = warmup_steps
 
     def __call__(self, step):
-        step = tf.cast(step, tf.float32)  ############################
+        # step = tf.cast(step, tf.float32)  ############################
         arg1 = tf.math.rsqrt(step)
         arg2 = step * (self.warmup_steps ** -1.5)
 
